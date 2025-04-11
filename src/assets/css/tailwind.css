@@ -116,6 +116,9 @@ body{
     justify-content: space-between;
     gap: 20px;
 }
+#newItemText{
+    color: #040b3cdd;
+}
 .pending,
 .done{
     width: 50%;
