@@ -59,7 +59,7 @@ body{
 }
 #main{
     width: 1280px;
-    height: 850px;
+    height: 825px;
     background: #040b3cdd;
     border-radius: 15px;
     -webkit-border-radius: 15px;
@@ -104,9 +104,7 @@ body{
 #updateItemBtn{
     width: 124px;
 }
-#updateItemBtn{
-    display: none;
-}
+
 .form-control button:hover{
     color: #fff;
     background-color: #040b3cdd;
