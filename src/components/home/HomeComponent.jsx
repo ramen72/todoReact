@@ -3,14 +3,16 @@ import { useSelector, useDispatch } from 'react-redux'
 import { FaPenToSquare } from "react-icons/fa6";
 import { GiCheckMark } from "react-icons/gi";
 import { FaRegTrashCan } from "react-icons/fa6";
-import { addTodo, completeTodo, deleteTodo, editTodo, inputValue, updateTodo } from '../../slices/todo/todoSlice';
+import { TbRestore } from "react-icons/tb";
+import { addTodo, completeDeleteTodo, completeTodo, deleteTodo, editTodo, inputValue, restoreTodo, updateTodo } from '../../slices/todo/todoSlice';
 
 const HomeComponent = () => {
     
     const data = useSelector((state) => state.todo.value)
     const inValue = useSelector((state) => state.todo.inputValue)
     const addBtn = useSelector((state) => state.todo.addBtn)
-    const updateIndex = useSelector((state) => state.todo.updateIndex)
+    const completeValues = useSelector((state) => state.todo.completeValue)
+    // const updateIndex = useSelector((state) => state.todo.updateIndex)
     
 
 
@@ -42,7 +44,7 @@ const HomeComponent = () => {
                                                 <button onClick={()=>dispatch(editTodo({id:index,newValue:todo}))} className="editBtn">
                                                     <FaPenToSquare/>
                                                 </button>
-                                                <button onClick={()=>dispatch(completeTodo())} className="doneBtn">
+                                                <button onClick={(e)=>dispatch(completeTodo(index))} className="doneBtn">
                                                     <GiCheckMark />
                                                 </button>
                                                 <button onClick={()=>dispatch(deleteTodo(index))} className="pendingDeleteBtn">
@@ -56,7 +58,23 @@ const HomeComponent = () => {
                         </div>
                         <div className="done">
                             <h2 className="itemHead">Completed Items Details</h2>
-                            <ul id="completedListItemHolder"></ul>
+                            <ul id="completedListItemHolder">
+                            {
+                                    completeValues.map((todo,index)=>(
+                                        <li className="statusPending" key={index}>
+                                            <span className="taskItem">{todo}</span>
+                                            <div  className="buttonsWrapper">
+                                                <button onClick={(e)=>dispatch(restoreTodo(index))} className="doneBtn">
+                                                    <TbRestore className='text-white transition-all duration-300 hover:text-[#0400fd]'/>
+                                                </button>
+                                                <button onClick={()=>dispatch(completeDeleteTodo(index))} className="completeDeleteBtn">
+                                                    <FaRegTrashCan/>
+                                                </button>
+                                            </div>
+                                        </li>
+                                    ))
+                                }
+                            </ul>
                         </div>
                     </div>
                 </main>

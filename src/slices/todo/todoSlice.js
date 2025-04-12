@@ -19,7 +19,7 @@ export const todoSlice = createSlice({
     addTodo: (state, action) => {
       state.value.push(action.payload)
       state.inputValue = ""
-      console.log(state)
+      // console.log(state)
     },
     deleteTodo: (state, action) => {
       state.value.splice(action.payload, 1)      
@@ -35,13 +35,20 @@ export const todoSlice = createSlice({
       state.inputValue = ""
     },
     completeTodo: (state, action) => {
-      state.value.splice(action.payload, 1)      
       state.completeValue.push(state.value[action.payload]) 
-      console.log(state.completeValue)     
+      state.value.splice(action.payload, 1)
+    },
+    restoreTodo: (state, action) => {
+      state.value.push(state.completeValue[action.payload]) 
+      state.completeValue.splice(action.payload, 1)
+      console.log(action)
+    },
+    completeDeleteTodo: (state, action) => {
+      state.completeValue.splice(action.payload, 1)      
     },
   },
 })
 
-export const { inputValue, addTodo, deleteTodo, editTodo, updateTodo, completeTodo} = todoSlice.actions
+export const { inputValue, addTodo, deleteTodo, editTodo, updateTodo, completeTodo, restoreTodo, completeDeleteTodo } = todoSlice.actions
 
 export default todoSlice.reducer
