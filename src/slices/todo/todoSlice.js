@@ -19,7 +19,6 @@ export const todoSlice = createSlice({
     addTodo: (state, action) => {
       state.value.push(action.payload)
       state.inputValue = ""
-      // console.log(state)
     },
     deleteTodo: (state, action) => {
       state.value.splice(action.payload, 1)      
